@@ -25,22 +25,19 @@ public class e4889 {
                 if(str.charAt(i) == '}' && stack.size() > 0){
                     if(stack.peek() == '{'){
                         stack.pop();
-                    }else{
-                        stack.push(str.charAt(i));
+                        continue;
+                        }
                     }
-                }else{
-                    stack.push(str.charAt(i));
-                }
+                stack.push(str.charAt(i));
             }
 
             while(stack.size() > 0){
                 strbuf = stack.pop();
-                if(stack.peek().equals(strbuf)){
+                if(stack.pop().equals(strbuf)){
                     count += 1;
                 }else{
                     count += 2;
                 }
-                stack.pop();
             }
 
             System.out.println(num+". "+count);
