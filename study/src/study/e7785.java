@@ -2,7 +2,6 @@ package study;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.StringTokenizer;

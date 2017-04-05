@@ -2,8 +2,6 @@ package study;
 
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSplitPaneUI;
-
 public class e11720 {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);

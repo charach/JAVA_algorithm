@@ -1,7 +1,7 @@
 package study;
 
 
-import java.util.*;
+import java.util.Scanner;
 
 public class e11718 {
     public static void main(String[] args){
