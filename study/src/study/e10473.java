@@ -15,6 +15,9 @@ public class e10473 {
     Pos startPos;
     Pos endPos;
 
+    float[] diak;
+    boolean[] diakToken;
+
     public e10473() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
@@ -30,10 +33,17 @@ public class e10473 {
 
         int countCircle = Integer.parseInt(br.readLine());
         Pos[] circleAry = new Pos[countCircle+2];
+
+
         float[][] timePos = new float[countCircle+2][countCircle+2];
+        diak = new float[countCircle+2];
+        diakToken = new boolean[countCircle+2];
         float distanceBuf;
 
+
         circleAry[0] = startPos;
+
+        //원 정보 배열에 넣기
         for(int i=1;i<countCircle+1;i++){
             circleAry[i] = new Pos();
 
@@ -53,31 +63,60 @@ public class e10473 {
                    if( i==0 || i== circleAry.length-1){
                        timePos[i][j] = (distanceBuf)/5;
                    }else{
-
-                       if(distanceBuf > 50){
+                           //클때는 대포탐
+                       if(distanceBuf >= 50){
                            timePos[i][j] = 2+((distanceBuf - 50)/5);
 
-                       }else if(distanceBuf == 50){
-                           timePos[i][j] = 2;
-
+                           //작을때는 뛰어가는 것과 대포타는것 값 비교
                        }else{
-                           timePos[i][j] = Math.min(2+(50-distanceBuf)/5, distanceBuf/5);
+                           timePos[i][j] = Math.min(2+((50-distanceBuf)/5), distanceBuf/5);
+
                        }
                    }
                }
+           }
+       }
 
-           }
+       //초기화
+       for(int i=0;i<diak.length;i++){
+           diak[i] = timePos[0][i];
        }
-       float minTime= 999999;
-       for(int i=0;i<timePos.length;i++){
-           for(int j=0;j<timePos.length;j++){
-               System.out.print(timePos[i][j] + " ");
+       diakToken[0] = true;
+
+       int k;
+       //다익스트라 알고리즘
+       for(int i=1;i<diak.length;i++){
+           k = findMinIndex();
+           diakToken[k] = true;
+           for(int j=1;j<diak.length;j++){
+               if(diakToken[j] == true){
+                   continue;
+               }else{
+                   diak[j] = Math.min(diak[j], diak[k]+timePos[k][j]);
+
+               }
            }
-           System.out.println();
+
        }
-       System.out.println(minTime);
+       System.out.println(diak[countCircle+1]);
+
+
     }
-
+    //find min ary
+    int findMinIndex(){
+        int index = 0;
+        float min;
+        int j = 0;
+        while(diakToken[j] == true){j++;}
+        min = diak[j];
+        for(int i=0;i<diak.length;i++){
+            if(min >= diak[i] && diakToken[i] == false){
+                min = diak[i];
+                index = i;
+            }
+        }
+        return index;
+    }
 
 
     //Calculate distance
@@ -87,6 +126,7 @@ public class e10473 {
 
 
     public static void main(String[] args) throws IOException {
+
         new e10473();
     }
 
