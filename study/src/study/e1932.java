@@ -7,59 +7,62 @@ import java.util.StringTokenizer;
 
 public class e1932 {
     int ary[];
-    int dp[];
     int leftAry[];
     int rightAry[];
-    public e1932() throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int length = Integer.parseInt(br.readLine());
-        String strbuf;
-        StringTokenizer st;
-        int aryLoc = 0;
-        int leftAryPos= 0 ,rightAryPos = 0;
-        ary = new int[(length) * (length+1) / 2];
-        dp  = new int[(length) * (length+1) / 2];
-        leftAry = new int[length];
-        rightAry = new int[length];
+    int height;
+    int arySize;
 
-        /* init ary*/
-        while(length-->0){
-            strbuf = br.readLine();
-            st = new StringTokenizer(strbuf, " ");
+    int dp[];
+    int heightPos;
+    int max;
+
+    e1932() throws IOException{
+        BufferedReader br = new  BufferedReader(new InputStreamReader(System.in));
+
+        height = Integer.parseInt(br.readLine());
+        arySize = (height%2 == 0? (height/2)*(height+1) : (height+1)/2 * (height));
+        ary = new int[arySize];
+        dp = new int[arySize];
+        leftAry = new int[height];
+        rightAry = new int[height];
+
+        StringTokenizer st;
+        int aryIndex=0;
+
+        for(int i=0;i<height;i++){
+            st = new StringTokenizer(br.readLine(), " ");
             while(st.hasMoreTokens()){
-                ary[aryLoc] = Integer.parseInt(st.nextToken());
-                aryLoc++;
+                ary[aryIndex++] = Integer.parseInt(st.nextToken());
             }
         }
-        leftAry[0] = rightAry[0] = 1;
-        for(int i=1;i<length;i++){
-            leftAry[i] = leftAry[i] +i;
-            rightAry[i] = rightAry[i] + (i+1);
+
+
+        leftAry[0] = 1;
+        rightAry[0] = 2;
+        for(int i=1;i<height;i++){
+            leftAry[i] = (i+1) + (leftAry[i-1]);
+            rightAry[i] = (i+2) + (rightAry[i-1]);
         }
 
         dp[0] = ary[0];
-        dp[1] = ary[1] + ary[0];
-        dp[2] = ary[2] + ary[0];
+        max = dp[0];
+        heightPos = 0;
 
-
-        for(int i=3;i<dp.length;i++){
-            if(leftAry[leftAryPos] == i){
-                dp[i] = ary[i] + dp[i-leftAryPos];
-                leftAryPos++;
-            }else if(rightAry[rightAryPos] == i){
-                dp[i] = ary[i] + dp[i-(rightAryPos+1)];
-                rightAryPos++;
-            }else{
-                dp[i] = Math.max(dp[i-(leftAryPos+1)]+ary[i], dp[i-leftAryPos]+ary[i]);
+        for(int i=1;i<arySize;i++){
+            if(i == leftAry[heightPos]){
+                dp[i] = ary[i] + dp[i-(heightPos+1)];
+            }else if(i == rightAry[heightPos]){
+                dp[i] = ary[i] + dp[i-(heightPos+2)];
+                heightPos++;
+            }
+            else{
+                dp[i] = Math.max(dp[i-(heightPos+1)], dp[i-(heightPos+2)])+ary[i];
             }
 
-        }
+            max =( max>dp[i]? max : dp[i]);
 
-        int max = 0;
-        for(int i=dp.length-length;i<dp.length;i++){
-            max = Math.max(max, dp[i]);
         }
-        System.out.println(dp[dp.length-1]);
+        System.out.println(max);
 
 
 
