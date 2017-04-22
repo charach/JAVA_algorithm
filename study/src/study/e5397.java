@@ -18,7 +18,6 @@ public class e5397 {
         while(count-->0){
         	root = new LinkedNode();
         	posBuf = root;
-        
         	stringBuf = br.readLine();
         	for(int i=0;i<stringBuf.length();i++){
         		if(stringBuf.charAt(i) == '<'){
@@ -32,6 +31,9 @@ public class e5397 {
         		}else if(stringBuf.charAt(i) == '-'){
         			if(posBuf != root){
         				posBuf.prev.next = posBuf.next;
+        				if(posBuf.next != null){
+        					posBuf.next.prev = posBuf.prev;
+        				}
         				posBuf = posBuf.prev;
         			}
         		}else{
