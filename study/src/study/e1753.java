@@ -33,8 +33,12 @@ public class e1753 {
             queue[startPoint].add(new GraphNode(endPoint,weight));
         }
         if(queue[rePoint] == null){
-            for(int j=1;j<dikAry.length;j++)
-                System.out.println("INF");
+            for(int j=1;j<dikAry.length;j++){
+                if(j == rePoint)
+                    System.out.println(0);
+                else
+                    System.out.println("INF");
+            }
             return;
         }
         GraphNode nodeBuf;
