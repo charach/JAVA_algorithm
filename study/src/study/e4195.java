@@ -57,7 +57,6 @@ public class e4195 {
 					System.out.println(graph.get(location).size());
 				}else if(friendList.get(str1).equals(friendList.get(str2))){
 					System.out.println(graph.get(friendList.get(str1)).size());
-			    
 			    }else{
 					if(graph.get(friendList.get(str1)).size() > graph.get(friendList.get(str2)).size()){
 						iterator = graph.get(friendList.get(str2)).iterator();
