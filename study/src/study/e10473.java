@@ -3,12 +3,7 @@ package study;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.StringTokenizer;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 public class e10473 {
     //시작점과 끝점

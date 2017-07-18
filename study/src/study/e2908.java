@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import sun.util.locale.StringTokenIterator;
-
 public class e2908 {
 
     public e2908() throws IOException {
