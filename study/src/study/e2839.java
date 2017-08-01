@@ -8,25 +8,19 @@ public class e2839 {
 
         Scanner sc = new Scanner(System.in);
         int weight = sc.nextInt();
-        int count = 0;
-        if(weight%5 != 3 && weight%3 == 0){
-            System.out.println(weight/3);
-            return;
+        int five = 0,three = 0;
+        five = weight/5;
+        weight = weight %5;
+        while(five>=0){
+            if(weight % 3 ==0){
+                three = weight /3;
+                weight = 0;
+                break;
+            }
+            five--;
+            weight += 5;
         }
-        while(weight >=5){
-            weight -= 5;
-            count++;
-        }
-        while(weight>=3){
-            weight -= 3;
-            count++;
-        }
-        if(weight != 0){
-
-            System.out.println("-1");
-        }else{
-            System.out.println(count);
-        }
+        System.out.println(weight == 0?five+three:-1);
 
     }
 

@@ -15,6 +15,7 @@ public class e2749 {
             System.out.println(1);
             return;
         }
+        count  = count%1500000;
         for(int i=0;i<count;i++){
             if(i%2 == 0){
                 a = (a+ b)%1000000;
