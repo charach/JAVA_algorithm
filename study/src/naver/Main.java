@@ -13,10 +13,10 @@ public class Main {
 
 
     public static void main(String[] args) {
-        c2 c2 = (c2)new c2();
-        System.out.println(c2.i);
-        c2.print();
-
+        
+        int[][] ary= new int[4][6];
+        System.out.println(ary.length);
+        System.out.println(ary[0].length);
     }
 
 }
